@@ -27,7 +27,9 @@ export default function ThoughtsForm({addThought, dataRepository}) {
       console.log(payload);
 
       const created_item = await dataRepository.createItem(payload);
-      addThought(created_item);
+      console.log(created_item);
+
+      addThought(created_item['entity']);
       setContent('');
       setFile(null);
     };
