@@ -9,10 +9,9 @@ export default function ThoughtsForm({addThought, dataRepository}) {
   const [content, setContent] = useState('');
   const [convertToText, setConvertToText] = useState(true);
   const [file, setFile] = useState(null);
+  const [fileInput, setFileInput] = useState(undefined);
 
   const handleSubmit = () => { 
-
-
     const createItem = async () => {
       let payload = {thought: { content: content }};
 
@@ -29,8 +28,9 @@ export default function ThoughtsForm({addThought, dataRepository}) {
       const created_item = await dataRepository.createItem(payload);
       console.log(created_item);
 
-      addThought(created_item['entity']);
+      if(created_item) { addThought(created_item['entity']); };
       setContent('');
+      setFileInput(undefined);
       setFile(null);
     };
     createItem();
@@ -53,7 +53,7 @@ export default function ThoughtsForm({addThought, dataRepository}) {
       </InputGroup>
 
       <InputGroup className="mb-3">
-        <Form.Control type="file" size="sm"  onChange={e => setFile(e.target.files[0])} />
+        <Form.Control type="file" size="sm" value={fileInput} onChange={e => setFile(e.target.files[0])} />
         <Form.Select size="sm" className="file_joined_select" value={convertToText} onChange={e => setConvertToText(e.target.value)}>
           <option value="true"  >Convert to text</option>
           <option value="false">Do not convert to text</option>
