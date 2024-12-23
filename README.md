@@ -25,6 +25,7 @@ https://testing-library.com/docs/react-testing-library/api
 
 https://qa-nora.medium.com/unit-testing-with-jest-and-integration-with-github-actions-bc241b31d257
 
+https://github.com/sapegin/jest-cheat-sheet?tab=readme-ov-file#mock-functions
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
