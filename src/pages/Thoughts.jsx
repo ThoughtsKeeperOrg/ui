@@ -22,7 +22,6 @@ const Home = () => {
   }, []);
 
   const addThought = (item) => {
-
     setItems([... items,item]);
   }
 
