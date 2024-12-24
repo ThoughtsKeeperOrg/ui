@@ -4,9 +4,7 @@ export default function ThoughtsList({items}) {
   // items.slice().reverse().forEach((item) => {
   items.reduceRight((_, item) => {
     rows.push(
-      <div key={item.id}>
-        {item.content}
-      </div>
+      <div key={item.id} dangerouslySetInnerHTML={{ __html: item.content.replace(/\n/g, "<br />")}} />
     );
   }, 0);
 
