@@ -1,3 +1,6 @@
+// import socket from './../../../user_socket';
+
+
 export default function ThoughtsList({items}) {
   const rows = [];
 
