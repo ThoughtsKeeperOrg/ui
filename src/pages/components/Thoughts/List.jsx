@@ -1,5 +1,3 @@
-// import socket from './../../../user_socket';
-
 import ThoughtsListItem from './ListItem';
 
 export default function ThoughtsList({items}) {

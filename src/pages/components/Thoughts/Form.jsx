@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -24,7 +23,6 @@ export default function ThoughtsForm({addThought, dataRepository}) {
       }
 
       console.log(payload);
-
       const created_item = await dataRepository.createItem(payload);
       console.log(created_item);
 
