@@ -52,8 +52,8 @@ const Home = () => {
 
   const updateThought = (item) => {
       if(!item) { return };
-      items[0]['content'] = item['content'];
-      setItems(items);
+
+      addThought(item)
   }
 
   return <Row>
