@@ -7,12 +7,6 @@ import Thoughts from "./pages/Thoughts";
 import NoPage from "./pages/NoPage";
 import socket from './user_socket';
 
-
-
-
-
-
-
 export default function App() {
   return (
     <BrowserRouter>

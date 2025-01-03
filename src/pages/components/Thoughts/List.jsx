@@ -1,13 +1,13 @@
 // import socket from './../../../user_socket';
 
+import ThoughtsListItem from './ListItem';
 
 export default function ThoughtsList({items}) {
   const rows = [];
 
-  // items.slice().reverse().forEach((item) => {
   items.reduceRight((_, item) => {
     rows.push(
-      <div key={item.id} dangerouslySetInnerHTML={{ __html: item.content.replace(/\n/g, "<br />")}} />
+      <ThoughtsListItem item={item}/>
     );
   }, 0);
 

@@ -40,3 +40,15 @@
 .file_joined_select {
   max-width: 210px;
 }
+
+.wide-list-item{
+  margin-bottom: 5px;
+}
+
+.wide-list-item:hover { 
+  -moz-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+  background: #e6fff0; 
+}
