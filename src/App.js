@@ -6,7 +6,6 @@ import Layout from "./pages/Layout";
 import Thoughts from "./pages/Thoughts";
 import ThoughtsAssociations from "./pages/ThoughtsAssociations";
 import NoPage from "./pages/NoPage";
-// import socket from './user_socket';
 
 export default function App() {
   return (
