@@ -7,7 +7,7 @@ const Layout = () => {
     <Container>
       <Nav>
         <Nav.Item>
-          <Nav.Link to="/">Home</Nav.Link>
+          <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
       </Nav>
       <Outlet />

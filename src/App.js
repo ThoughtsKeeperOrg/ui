@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Thoughts from "./pages/Thoughts";
+import ThoughtsAssociations from "./pages/ThoughtsAssociations";
 import NoPage from "./pages/NoPage";
 import socket from './user_socket';
 
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Thoughts />} />
+          <Route path="/thoughts/:id/associations" element={<ThoughtsAssociations />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

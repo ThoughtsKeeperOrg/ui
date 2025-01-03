@@ -7,7 +7,7 @@ export default function ThoughtsList({items}) {
 
   items.reduceRight((_, item) => {
     rows.push(
-      <ThoughtsListItem item={item}/>
+      <ThoughtsListItem key={item.id} item={item}/>
     );
   }, 0);
 
