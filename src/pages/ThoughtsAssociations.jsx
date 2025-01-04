@@ -14,11 +14,10 @@ const ThoughtsAssociations = () => {
 
   const apiAdapter = CrudAdapter(process.env.REACT_APP_BE_API_URL);
   const thoughtsRepository = CrudDataRepository(apiAdapter, 'api/thoughts');
-  const associatonsRepository = CrudDataRepository(apiAdapter, 'api/associations');
 
   useEffect(() => {
       const fetchAssociations = async () => {
-          const data = await associatonsRepository.getItemById(id);
+          const data = await thoughtsRepository.getItemById(id+"/associations");
           setAssociatons(data);
       };
       fetchAssociations();
