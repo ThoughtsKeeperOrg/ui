@@ -1,4 +1,4 @@
-React + Bootsrap app which handles user`s input and submits form to back end. Also it renders saved previously thoughts. 
+React + Bootsrap app which handles user`s input and submits form to back end. Also it renders previously saved thoughts. 
 UI comunicates with backend services via REST api (TODO: migrate to graphql) and websockets.
 
 <p style="float:left">
