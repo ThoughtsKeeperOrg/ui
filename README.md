@@ -1,3 +1,10 @@
+React + Bootsrap app which handles user`s input and submits form to back end. Also it renders saved previously thoughts. 
+UI comunicates with backend services via REST api (TODO: migrate to graphql) and websockets.
+
+<p style="float:left">
+<img src="https://github.com/ThoughtsKeeperOrg/.github/blob/main/profile/form_page.jpg" width="400"/>
+<img src="https://github.com/ThoughtsKeeperOrg/.github/blob/main/profile/associations_page.jpg" width="400"/>
+</p>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
