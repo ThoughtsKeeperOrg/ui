@@ -1,7 +1,7 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import React, { useState, useEffect } from "react";
-import {Socket} from "phoenix"
+import { Socket } from "phoenix";
 import ThoughtsForm from './components/Thoughts/Form';
 import ThoughtsList from './components/Thoughts/List';
 import CrudDataRepository from '../repositories/crudDataRepository';
@@ -15,22 +15,20 @@ const Home = () => {
   const [updated_item, setUpdatedItem] = useState(null);
 
   const connectToWS = () => {
-    const ROOT_SOCKET = 'ws://localhost:4000'
     let socket = new Socket("ws://localhost:4000/socket", {params: {token: window.userToken}});
-    socket.connect()
+    socket.connect();
 
-    let channel = socket.channel("room:lobby", {})
+    let channel = socket.channel("room:lobby", {});
 
     channel.on("new_msg", payload => {
-      console.log('WS message received:')
-      console.log(payload)
+      console.log('WS message received:', payload);
       setUpdatedItem(payload['entity']);
-    })
+    });
 
     channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
-      .receive("error", resp => { console.log("Unable to join", resp) })
-  }
+      .receive("error", resp => { console.log("Unable to join", resp) });
+  };
 
   useEffect(() => {
       const fetchItems = async () => {
@@ -38,32 +36,48 @@ const Home = () => {
           setItems(data);
       };
       fetchItems();
-
       connectToWS();
   }, []);
 
   useEffect(() => {
-    updateThought(updated_item);
+    if (updated_item) {
+      updateThought(updated_item);
+    }
   }, [updated_item]);
 
+  // Purely adds a new item using functional state
   const addThought = (item) => {
-    setItems([... items,item]);
-  }
+    setItems((prevItems) => [...prevItems, item]);
+  };
 
+  // Handles both updating existing items and adding new ones safely
   const updateThought = (item) => {
-      if(!item) { return };
+    if (!item) return;
 
-      addThought(item)
-  }
+    setItems((prevItems) => {
+      // Check if the item already exists in state by its ID
+      const exists = prevItems.some((prevItem) => prevItem.id === item.id);
 
-  return <Row>
-          <Col>
-            <h4>Thoughts</h4>
-            <ThoughtsForm addThought={addThought} dataRepository={dataRepository} />
-            <hr/>
-            <ThoughtsList items={items}/>
-          </Col>
-        </Row>;
+      if (exists) {
+        // If it exists, map through and replace the old version with the WebSocket version
+        return prevItems.map((prevItem) => (prevItem.id === item.id ? item : prevItem));
+      }
+
+      // If it doesn't exist, safely append it
+      return [...prevItems, item];
+    });
+  };
+
+  return (
+    <Row>
+      <Col>
+        <h4>Thoughts</h4>
+        <ThoughtsForm addThought={addThought} dataRepository={dataRepository} />
+        <hr/>
+        <ThoughtsList items={items}/>
+      </Col>
+    </Row>
+  );
 };
 
 export default Home;
