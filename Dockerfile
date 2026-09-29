@@ -1,20 +1,19 @@
-# Fetching the latest node image on alpine linux
-FROM node:23.5.0-alpine3.21 AS development
-
-# Declaring env
-ENV NODE_ENV development
-
-# Setting up the work directory
+FROM node:24-alpine AS build
 WORKDIR /react-app
 
-# Installing dependencies
-COPY ./package*.json /react-app
+ARG REACT_APP_BE_API_URL=http://localhost:3008
+ENV REACT_APP_BE_API_URL=$REACT_APP_BE_API_URL
 
-RUN npm config set legacy-peer-deps true 
-RUN npm install
+COPY package*.json ./
+RUN npm config set legacy-peer-deps true && npm ci
 
-# Copying all the files in our project
+# Move it here so npm ci installs everything, but React builds optimized code
+ENV NODE_ENV=production 
 COPY . .
+RUN npm run build
 
-# Starting our application
-CMD ["npm","start"]
+# Production stage
+FROM nginx:stable-alpine AS production
+COPY --from=build /react-app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
